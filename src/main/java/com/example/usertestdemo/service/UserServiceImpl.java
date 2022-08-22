@@ -14,7 +14,6 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public Users selectPrimary(Integer id) throws  Exception {
-
         return userMapper.selectPrimary(id);
 
     }
