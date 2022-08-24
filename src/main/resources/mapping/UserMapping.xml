@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.usertestdemo.dao.UserMapper">
+
+    <resultMap id="BaseResultMap" type="com.example.usertestdemo.domain.Users">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+    </resultMap>
+
+    <select id="selectPrimary" resultType="com.example.usertestdemo.domain.Users">
+        select * from users where id = #{id}
+    </select>
+
+
+    <delete id="deletePrimary">
+         delete from users where id = #{id}
+    </delete>
+
+    <insert id="addPrimary">
+        insert into users(id,name,password) value (#{id},#{name},#{password})
+    </insert>
+</mapper>

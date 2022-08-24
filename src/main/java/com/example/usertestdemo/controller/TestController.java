@@ -20,7 +20,7 @@ import static com.example.usertestdemo.util.LocaleUtil.localeByLanguageTag;
 @RestController
 @RequestMapping("/Test")
 @ControllerAdvice
-@Api(tags = "用户测试管理-张利子和葛沁阳---小小栗")
+@Api(tags = "用户测试管理-张利子和葛沁阳")
 public class TestController {
 
     @Autowired

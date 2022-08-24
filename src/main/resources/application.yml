@@ -1,0 +1,8 @@
+spring:
+  profiles:
+    active: test
+    messages:
+      basename: i18n/message #配置国际化资源文件路径
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
