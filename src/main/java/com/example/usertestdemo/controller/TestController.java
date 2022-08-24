@@ -1,5 +1,6 @@
 package com.example.usertestdemo.controller;
 
+import com.example.usertestdemo.aspect.PermissionAnnotation;
 import com.example.usertestdemo.domain.CourseInfo;
 import com.example.usertestdemo.domain.MyException;
 import com.example.usertestdemo.domain.Users;
@@ -74,6 +75,18 @@ public class TestController {
         messageSource.setDefaultEncoding("UTF-8");
         messageSource.setCacheSeconds(3600);
         return messageSource;
+    }
+
+    @GetMapping(value = "/getTest")
+    public Users aopTest() throws Exception {
+        return userService.selectPrimary(1);
+    }
+
+    @RequestMapping(value = "/check", method = RequestMethod.POST)
+    // 添加这个注解
+    @PermissionAnnotation()
+    public Integer getGroupList(@RequestBody(required=false) CourseInfo courseInfo) {
+        return userService.addPrimary(courseInfo);
     }
 }
 

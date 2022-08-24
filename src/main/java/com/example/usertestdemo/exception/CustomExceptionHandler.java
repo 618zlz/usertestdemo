@@ -23,7 +23,7 @@ public class CustomExceptionHandler {
             map.put("msg","缺少必需参数："+((MissingServletRequestParameterException) ex).getParameterName());
         }
         else if(ex instanceof MyException){
-            map.put("msg","这是自定义异常");
+            map.put("msg",((MyException) ex).getMsg());
         }
         return map;
     }
