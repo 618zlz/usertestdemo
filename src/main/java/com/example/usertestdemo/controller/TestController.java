@@ -3,6 +3,7 @@ package com.example.usertestdemo.controller;
 import com.example.usertestdemo.aspect.PermissionAnnotation;
 import com.example.usertestdemo.domain.CourseInfo;
 import com.example.usertestdemo.domain.MyException;
+import com.example.usertestdemo.domain.Score;
 import com.example.usertestdemo.domain.Users;
 import com.example.usertestdemo.service.UserService;
 import io.swagger.annotations.Api;
@@ -14,7 +15,9 @@ import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 import static com.example.usertestdemo.util.LocaleUtil.localeByLanguageTag;
 
@@ -87,6 +90,22 @@ public class TestController {
     @PermissionAnnotation()
     public Integer getGroupList(@RequestBody(required=false) CourseInfo courseInfo) {
         return userService.addPrimary(courseInfo);
+    }
+
+    @ApiOperation(value = "用户测试一对多查询",notes = "用户测试一对多查询notes")
+    @RequestMapping(value = "/getJoin/{id}",method = RequestMethod.GET)
+    public List<Score> getJoin(@PathVariable Integer id) {
+        return (List<Score>) userService.oneToMoreQuery(id);
+    }
+
+    @ApiOperation(value = "用户测试一对多查询lambda",notes = "用户测试一对多lambda查询notes")
+    @RequestMapping(value = "/getJoinLambda/{id}",method = RequestMethod.GET)
+    public Integer getJoinLambda(@PathVariable Integer id) {
+        List<Score> list1 = (List<Score>) userService.oneToMoreQuery(id);
+        List<Integer> lscores = list1.stream().map(e -> e.getScore()).collect(Collectors.toList());
+        System.out.println(id + "号对应的分数为：" + lscores.get(id-1));
+        return lscores.get(id-1);
+
     }
 }
 

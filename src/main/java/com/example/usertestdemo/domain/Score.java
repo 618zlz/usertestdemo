@@ -5,9 +5,8 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class Users {
+public class Score {
     private Integer id;
     private String name;
-    private String password;
-    private List<Score> scores;
+    private Integer score;
 }

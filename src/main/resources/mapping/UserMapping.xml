@@ -6,7 +6,17 @@
         <result column="id" jdbcType="INTEGER" property="id" />
         <result column="name" jdbcType="VARCHAR" property="name" />
         <result column="password" jdbcType="VARCHAR" property="password" />
+        <collection property="scores" ofType="com.example.usertestdemo.domain.Score">
+            <result column="id" jdbcType="INTEGER" property="id" />
+            <result column="name" jdbcType="VARCHAR" property="name" />
+            <result column="score" jdbcType="INTEGER" property="score" />
+        </collection>
+
     </resultMap>
+
+    <select id="oneToMoreQuery" resultMap="BaseResultMap">
+        select u.*,s.score from users u left join score s on u.name = s.name where u.id = #{id}
+    </select>
 
     <select id="selectPrimary" resultType="com.example.usertestdemo.domain.Users">
         select * from users where id = #{id}
